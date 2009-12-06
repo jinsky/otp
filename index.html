@@ -1,0 +1,137 @@
+<html>
+<title>Currently in the 'pu' branch</title>
+<style type="text/css" media="all">
+    body {
+      width: 600px;
+    }
+</style>
+<body>
+<h1>Currently in the 'pu' branch</h1>
+<p>The comment about each topic branch is taken from the latest
+<em>What's cooking in erlang/otp</em> email and may no longer apply if
+the topic branch has been updated.
+<ul>
+<li><a href="http://github.com/erlang/otp/commit/6484fb1e8c037da08dcae2ee12668d312c8898c5">ay/split_binary_docfix</a> (erts):
+
+<ul>
+<li><a href="http://github.com/erlang/otp/commit/1556a6af97ebcf0bc47d3d2ac7e7ee6781507019">documentation: Fix erlang:split_binary/2 Pos argument</a></li>
+</ul>
+<p><i>New topic branch</i>
+<p>
+</li>
+<li><a href="http://github.com/erlang/otp/commit/7c4457770981906703f41ba10bd2f17e43181506">tc/premodern-fpe</a> (erts):
+
+<ul>
+<li><a href="http://github.com/erlang/otp/commit/b95cf9282be56d6c4455d29dc54d3ee5be19f72d">Test for reliable fpes on Darwin platforms without DARWIN_MODERN_MCONTEXT</a></li>
+</ul>
+<p><i>New topic branch</i>
+<p>
+</li>
+<li><a href="http://github.com/erlang/otp/commit/c38d74c3afcc68f660ef7420a109aeae865021c1">sc/sctp_connect_enhancement</a> (erts, kernel):
+
+<ul>
+<li><a href="http://github.com/erlang/otp/commit/92f3ceea0fa51df308f6f2689ff82857b6442c30">Implement a non-blocking gen_sctp:connect</a></li>
+<li><a href="http://github.com/erlang/otp/commit/2666b68aab2167266f49b462e3ed63e6f2045709">Correctly type sctp_assoc_id as signed, not unsigned</a></li>
+</ul>
+<p>Raimo (the maintainer of the sctp code in OTP) is quite busy
+with the new erlang.org site (demo.erlang.org), so there might
+be a while before he will look at this branch, but it will
+definitely happend before the next release.
+
+<p>
+</li>
+<li><a href="http://github.com/erlang/otp/commit/50c90f7ab302124e652cf63cd11971082dbb90ce">sc/ssl_pkix_extensions</a> (ssl):
+
+<ul>
+<li><a href="http://github.com/erlang/otp/commit/31ccb1da34026f567f7e4a8b2ac282ab4782c96e">Fix crash when decoding commercial certificates</a></li>
+</ul>
+<p>Dan G says that the pkix stuff is deprecated, but that doesn't
+seem to be documented and the replacement application public_key
+is not documented either. We should probably include this
+correction anyway.
+
+<p>We will keep this branch until some sort of decision has
+been made.
+
+<p>
+
+</li>
+<li><a href="http://github.com/erlang/otp/commit/9d63c5dc8baf7bdb0db15271d94ad27508800a1a">po/blowfish_ecb_cbc_ofb</a> (crypto):
+
+<ul>
+<li><a href="http://github.com/erlang/otp/commit/24300da4b56e04e25a8eb4eda2b54356f7181819">Add Blowfish tests</a></li>
+<li><a href="http://github.com/erlang/otp/commit/b120895a881ca65456af3552b1a6ce65609c3f16">Add Blowfish ECB, CBC and OFB modes</a></li>
+</ul>
+<p>The crypto test suite is now included in ccase/r13b04_dev, so
+I have rebased this branch and resolved the conflicts in
+Makefile and crypto.spec.
+
+<p>
+</li>
+<li><a href="http://github.com/erlang/otp/commit/459494a1f7177c7eb0626b4e4b61e013687131c7">bg/otp_build-improvements</a> (otp):
+
+<ul>
+<li><a href="http://github.com/erlang/otp/commit/d6a38619f53e525082c1c6e057ebcafb80564138">Support updating the primary bootstrap in a git repository</a></li>
+<li><a href="http://github.com/erlang/otp/commit/c16fcafffa500c2e34e4982f5f44406cbb0488ab">Determine which VCS is being used</a></li>
+<li><a href="http://github.com/erlang/otp/commit/2bcfe0d9307a964abf8875b8a9501052351aeced">.gitignore: Don't ignore script/boot files in bootstrap/bin</a></li>
+</ul>
+<p></li>
+<li><a href="http://github.com/erlang/otp/commit/25473a413ded6e052698f5b2d1df2c074e07cb4f">bg/slimmer-history</a> (compiler, erts):
+
+<ul>
+<li><a href="http://github.com/erlang/otp/commit/a910f28e0b929d108b5f3b1b9d5b90299b3f17bb">beam_makepos: Do not put any dates in generated files</a></li>
+<li><a href="http://github.com/erlang/otp/commit/2c76865b9beac0d762fc70f8de753308d4fe57c8">compiler: Teach 'slim' to omit compilation info</a></li>
+</ul>
+<p>We don't want the compiler to put the date/time or the compiler's version
+numbers into the beam files in the checked-in bootstrap, because
+then all beam files in the bootstrap will have to be replaced every
+time the primary bootstrap is updated.
+
+<p>The only potential problem this might cause is *if* the primary
+bootstrap should need to be native-code compiled (the hipe compiler
+checks the version number to make sure that the beam file was
+compiled by a supported compiler, I think).
+
+<p>
+</li>
+<li><a href="http://github.com/erlang/otp/commit/ecbf59d0f17b80dc00e003b40b4f4018a1e3da3e">at/odbc_osx_fix</a> (odbc):
+
+<ul>
+<li><a href="http://github.com/erlang/otp/commit/88c71c95d23afc3d185d64b050cb5fba243d4cee">Workaround broken ODBC implementation on OSX 10.5</a></li>
+</ul>
+<p></li>
+<li><a href="http://github.com/erlang/otp/commit/3b2869adadba2841b79a1893a2abe736db52f8c0">db/tv_nthtail_fix</a> (tv):
+
+<ul>
+<li><a href="http://github.com/erlang/otp/commit/bfc18a8e3dd21e8961eb6657ae5f00cf6ebdf57d">Fix for tv which restarts while trying to open a table</a></li>
+</ul>
+<p>We will cook this topic for a while and include it in the next
+release unless someone finds a problem with it or a better fix.
+
+<p>
+</li>
+<li><a href="http://github.com/erlang/otp/commit/47798e6257d32fec0d4471df695d1ceff8471d34">as/c_nc-fix</a> (stdlib):
+
+<ul>
+<li><a href="http://github.com/erlang/otp/commit/0d4f83ce109b69777e8bb069af0f4e63cc580d7c">Fix c:nc to use outdir or cwd to find compiled object file</a></li>
+</ul>
+<p>I think there should be a test case before we graduate this topic,
+so that we'll know that it will continue to work.
+
+<p>
+</li>
+<li><a href="http://github.com/erlang/otp/commit/18e8e5ac5f4cc5de0ad3b15e0236500189b77f07">bd/http_chunk_fix</a> (inets):
+
+<ul>
+<li><a href="http://github.com/erlang/otp/commit/c2553beb7e6090cf9b0f4d662a99717c25221e1c">http_chunk data handling/passing improvement.</a></li>
+</ul>
+<p></li>
+<li><a href="http://github.com/erlang/otp/commit/55a0d64ed71731ca7c3ea9f1474f71f154442641">po/odbc-update-delete-no-rows</a> (odbc):
+
+<ul>
+<li><a href="http://github.com/erlang/otp/commit/1a564f84da39a309e40353ae52f2bb4366268a1e">SQL_NO_DATA and SQLSTATE 00000 indicate success for updates/deletes that affect no rows</a></li>
+</ul>
+<p></li>
+</ul>
+</body>
+</html>
