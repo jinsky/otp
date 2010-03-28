@@ -165,7 +165,8 @@ all(suite) ->
      %%, session_cache_process_list, session_cache_process_mnesia
      ,reuse_session, reuse_session_expired, server_does_not_want_to_reuse_session,
      client_renegotiate, server_renegotiate,
-     client_no_wrap_sequence_number, server_no_wrap_sequence_number
+     client_no_wrap_sequence_number, server_no_wrap_sequence_number,
+     close_transport_accept
     ].
 
 %% Test cases starts here.
@@ -2041,6 +2042,31 @@ server_no_wrap_sequence_number(Config) when is_list(Config) ->
     ssl_test_lib:close(Server),
     ssl_test_lib:close(Client),
     ok.
+
+%%--------------------------------------------------------------------
+close_transport_accept(doc) ->
+    ["Tests closing ssl socket when waiting on ssl:transport_accept/1"];
+
+close_transport_accept(suite) ->
+    [];
+
+close_transport_accept(Config) when is_list(Config) ->
+    ServerOpts = ?config(server_opts, Config),
+    {_ClientNode, ServerNode, _Hostname} = ssl_test_lib:run_where(Config),
+
+    Port = 0,
+    Opts = [{active, false} | ServerOpts],
+    {ok, ListenSocket} = rpc:call(ServerNode, ssl, listen, [Port, Opts]),
+    spawn_link(fun() ->
+			test_server:sleep(?SLEEP),
+			rpc:call(ServerNode, ssl, close, [ListenSocket])
+	       end),
+    case rpc:call(ServerNode, ssl, transport_accept, [ListenSocket]) of
+	{error, closed} ->
+	    ok;
+	Other ->
+	    exit({?LINE, Other})
+    end.
 
 %%--------------------------------------------------------------------
 %%% Internal functions
